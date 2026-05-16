@@ -4,6 +4,8 @@
 
 # 🐝 Colmeia Girassol - Sistema de Gestão Escolar Infantil
 
+> **🔗 Link do Projeto no Ar:** [Acesse a Live Demo aqui!](https://mattiiyyah.github.io/ColmeiaGirassol/)
+
 Este projeto é um sistema de gestão para escolas infantis desenvolvido como parte integrante das atividades acadêmicas da **FATEC Rio Preto**. A **Colmeia Girassol** visa modernizar a comunicação entre escola e família, além de otimizar a gestão administrativa e pedagógica.
 
 ---
