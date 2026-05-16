@@ -420,3 +420,17 @@ body {
 .form-floating > label {
     padding: 1rem 0.75rem;
 }
+/* Lógica de Seções do Dashboard (SPA) */
+.dashboard-section {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.dashboard-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

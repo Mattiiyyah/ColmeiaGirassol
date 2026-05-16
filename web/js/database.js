@@ -55,12 +55,12 @@ window.db_mock = {
         { id: 7,  nome: "Zequinha Pereira",   dataNascimento: "2017-05-25", alergias: "Gatos",    restricoesAlimentares: "Nenhuma",  necessidadesEspeciais: "Nenhuma", responsavelId: 7,  autorizadoId: 7,  grauParentesco: "Mãe" },
         { id: 8,  nome: "Dudinha Rocha",      dataNascimento: "2018-12-10", alergias: "Nenhuma",  restricoesAlimentares: "Nenhuma",  necessidadesEspeciais: "Autismo", responsavelId: 8,  autorizadoId: 8,  grauParentesco: "Pai" },
         { id: 9,  nome: "Gui Mendes",         dataNascimento: "2020-08-05", alergias: "Nenhuma",  restricoesAlimentares: "Nenhuma",  necessidadesEspeciais: "Nenhuma", responsavelId: 9,  autorizadoId: 9,  grauParentesco: "Mãe" },
-        { id: 10, nome: "Lala Castro",        dataNascimento: "2019-04-18", alergias: "Nenhuma",  restricoesAlimentares: "Nenhuma",  necessidadesEspeciais: "Nenhuma", responsavelId: 10, autorizadoId: null, grauParentesco: "Pai" }
+        { id: 10, nome: "Lala Castro",        dataNascimento: "2019-04-18", alergias: "Nenhuma",  restricoesAlimentares: "Nenhuma",  necessidadesEspeciais: "Nenhuma", responsavelId: 10, autorizadoId: 10, grauParentesco: "Pai" }
     ],
 
     turmas: [
-        { id: 1,  nomeTurma: "Berçário I",    ano: "2024", grau: "Infantil", professorId: 1  },
-        { id: 2,  nomeTurma: "Berçário II",   ano: "2024", grau: "Infantil", professorId: 2  },
+        { id: 1,  nomeTurma: "Berçário I",    ano: "2024", grau: "Berçário", professorId: 1  },
+        { id: 2,  nomeTurma: "Berçário II",   ano: "2024", grau: "Berçário", professorId: 2  },
         { id: 3,  nomeTurma: "Maternal I-A",  ano: "2024", grau: "Infantil", professorId: 3  },
         { id: 4,  nomeTurma: "Maternal I-B",  ano: "2024", grau: "Infantil", professorId: 4  },
         { id: 5,  nomeTurma: "Maternal II-A", ano: "2024", grau: "Infantil", professorId: 5  },
@@ -102,7 +102,30 @@ window.db_mock = {
 
     // DiarioBordoEntity: matriculaNr referencia MatriculaEntity
     diarios: [
-        { id: 1, dataRegistro: "2024-05-16", refeicao: 1, alimentacao: "Comeu tudo", sono: "Dormiu 1h", humor: "Feliz", fraldas: "Troca normal", observacoes: "Muito participativo", matriculaNr: 101, professorId: 1 }
+        { id: 1,  dataRegistro: "2024-05-16", refeicao: 1, alimentacao: "Comeu tudo",      sono: "Dormiu 1h",   humor: "Feliz",      fraldas: "Troca normal", observacoes: "Muito participativo", matriculaNr: 101, professorId: 1 },
+        { id: 2,  dataRegistro: "2024-05-16", refeicao: 1, alimentacao: "Recusou legumes", sono: "Dormiu pouco", humor: "Agitado",    fraldas: "Troca normal", observacoes: "Brincou muito no parque", matriculaNr: 102, professorId: 2 },
+        { id: 3,  dataRegistro: "2024-05-16", refeicao: 1, alimentacao: "Comeu bem",       sono: "Não dormiu",   humor: "Calmo",      fraldas: "Troca normal", observacoes: "Concentrado na pintura", matriculaNr: 103, professorId: 3 },
+        { id: 4,  dataRegistro: "2024-05-16", refeicao: 1, alimentacao: "Comeu tudo",      sono: "Dormiu 2h",   humor: "Radiante",   fraldas: "Troca normal", observacoes: "Adora a roda de música", matriculaNr: 104, professorId: 4 },
+        { id: 5,  dataRegistro: "2024-05-16", refeicao: 1, alimentacao: "Lanchou bem",      sono: "Dormiu 1h30", humor: "Feliz",      fraldas: "Troca normal", observacoes: "Interagiu com os colegas", matriculaNr: 105, professorId: 5 },
+        { id: 6,  dataRegistro: "2024-05-16", refeicao: 1, alimentacao: "Comeu tudo",      sono: "Dormiu 1h",   humor: "Preguiçoso", fraldas: "Troca normal", observacoes: "Ficou quietinho hoje", matriculaNr: 106, professorId: 6 },
+        { id: 7,  dataRegistro: "2024-05-16", refeicao: 1, alimentacao: "Recusou a fruta",  sono: "Não dormiu",   humor: "Choroso",    fraldas: "Troca normal", observacoes: "Sentiu falta da mamãe", matriculaNr: 107, professorId: 7 },
+        { id: 8,  dataRegistro: "2024-05-16", refeicao: 1, alimentacao: "Comeu bem",       sono: "Dormiu 1h",   humor: "Feliz",      fraldas: "Troca normal", observacoes: "Muito interessado na história", matriculaNr: 108, professorId: 8 },
+        { id: 9,  dataRegistro: "2024-05-16", refeicao: 1, alimentacao: "Comeu tudo",      sono: "Dormiu 2h",   humor: "Energético", fraldas: "Troca normal", observacoes: "Correu muito no pátio", matriculaNr: 109, professorId: 9 },
+        { id: 10, dataRegistro: "2024-05-16", refeicao: 1, alimentacao: "Comeu bem",       sono: "Dormiu 1h",   humor: "Tranquilo",  fraldas: "Troca normal", observacoes: "Desenhou a família", matriculaNr: 110, professorId: 10 }
+    ],
+
+    // MatriculaAulasEntity: planejamentoId, matriculaNr, status (0=Presente, 1=Falta)
+    presencas: [
+        { planejamentoId: 1, matriculaNr: 101, status: 0 },
+        { planejamentoId: 1, matriculaNr: 102, status: 1 },
+        { planejamentoId: 2, matriculaNr: 103, status: 0 },
+        { planejamentoId: 2, matriculaNr: 104, status: 0 },
+        { planejamentoId: 3, matriculaNr: 105, status: 0 },
+        { planejamentoId: 3, matriculaNr: 106, status: 1 },
+        { planejamentoId: 4, matriculaNr: 107, status: 0 },
+        { planejamentoId: 4, matriculaNr: 108, status: 0 },
+        { planejamentoId: 5, matriculaNr: 109, status: 0 },
+        { planejamentoId: 5, matriculaNr: 110, status: 1 }
     ]
 };
 
@@ -134,7 +157,7 @@ window.Database = {
         Object.keys(window.db_mock).forEach(key => {
             window.__dbState[key] = JSON.parse(JSON.stringify(window.db_mock[key]));
         });
-        console.log("[Colmeia Girassol] Dados inicializados em memória — sincronizados com App.java.");
+        console.log("[Colmeia Girassol] Dados inicializados em memória — resetados a cada carregamento.");
     },
 
     get(key) {
@@ -142,10 +165,10 @@ window.Database = {
     },
 
     save(key, data) {
-        const collection = window.__dbState[key] ?? [];
+        const collection = this.get(key);
         const ids = collection.map(i => i.id ?? i.nr ?? 0);
         const newId = ids.length > 0 ? Math.max(...ids) + 1 : 1;
-        const record = key === "matriculas" ? { nr: newId, ...data } : { id: newId, ...data };
+        const record = key === "matriculas" ? { nr: 100 + newId, ...data } : { id: newId, ...data };
         collection.push(record);
         window.__dbState[key] = collection;
         return record;
@@ -207,6 +230,18 @@ window.Database = {
             const professor = this.getProfessor(d.professorId);
             return { ...d, aluno: matricula?.aluno ?? null, professor };
         });
+    },
+
+    getPresencasPorAula(planejamentoId) {
+        return this.get("presencas").filter(p => p.planejamentoId === planejamentoId).map(p => {
+            const matricula = this.getMatricula(p.matriculaNr);
+            return { ...p, aluno: matricula?.aluno ?? null };
+        });
+    },
+
+    getAlunosPorTurma(turmaId) {
+        const matriculas = this.get("matriculas").filter(m => m.turmaId === turmaId);
+        return matriculas.map(m => this.getAlunosCompleto().find(a => a.id === m.alunoId)).filter(Boolean);
     }
 };
 

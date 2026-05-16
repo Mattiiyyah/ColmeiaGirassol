@@ -101,9 +101,6 @@
                             <h4 class="fw-bold text-dark-blue mb-0">
                                 <i class="fa-solid fa-user-check text-light-blue me-2"></i>Pessoas Autorizadas a Buscar
                             </h4>
-                            <button class="btn btn-dark-blue btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#modalAutorizado">
-                                <i class="fa-solid fa-plus me-1"></i>Adicionar
-                            </button>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-hover align-middle mb-0">
@@ -175,20 +172,6 @@
 
     <script src="../js/database.js"></script>
     <script src="../js/render.js"></script>
-    <script>
-        function salvarAutorizado() {
-            const nome = document.getElementById('aut-nome').value.trim();
-            const cpf  = document.getElementById('aut-cpf').value.trim();
-            const parentesco = document.getElementById('aut-parentesco').value.trim();
-            const telefone = document.getElementById('aut-telefone').value.trim();
-            if (!nome || !cpf) { alert('Preencha ao menos Nome e CPF.'); return; }
-            Database.save('autorizados', { nome, cpf, grauParentesco: parentesco, telefone, rg: '—', dataNascimento: '—', cep: '—', cidade: '—', uf: 'SP', email: '—' });
-            bootstrap.Modal.getInstance(document.getElementById('modalAutorizado'))?.hide();
-            document.getElementById('modal-sucesso-msg').textContent = 'Autorização salva!';
-            new bootstrap.Modal(document.getElementById('modalSucesso')).show();
-            setTimeout(() => location.reload(), 1200);
-        }
-    </script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>AOS.init();</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

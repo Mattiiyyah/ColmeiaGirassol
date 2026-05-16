@@ -170,6 +170,7 @@ public class App {
         // Aluno 10
         AlunoEntity a10 = new AlunoEntity(10, "Lala Castro", LocalDate.of(2019, 4, 18), "Nenhuma", "Nenhuma", "Nenhuma", new ArrayList<>(), new ArrayList<>());
         a10.adicionarResponsavel(new ResponsavelAlunoEntity(r10, a10, "Pai", 100.0, 1));
+        a10.adicionarAutorizado(new AutorizadoBuscarAlunoEntity(ab10, a10));
         alunos.add(a10);
 
         // 1. Instanciação de Turmas
@@ -239,12 +240,33 @@ public class App {
         ArrayList<MatriculaAulasEntity> presencas = new ArrayList<>();
         MatriculaAulasEntity ma1 = new MatriculaAulasEntity(ap1, m1, 0); // Presente
         MatriculaAulasEntity ma2 = new MatriculaAulasEntity(ap1, m2, 1); // Falta
-        presencas.add(ma1); presencas.add(ma2);
+        MatriculaAulasEntity ma3 = new MatriculaAulasEntity(ap2, m3, 0); // Presente
+        MatriculaAulasEntity ma4 = new MatriculaAulasEntity(ap2, m4, 0); // Presente
+        MatriculaAulasEntity ma5 = new MatriculaAulasEntity(ap3, m5, 0); // Presente
+        MatriculaAulasEntity ma6 = new MatriculaAulasEntity(ap3, m6, 1); // Falta
+        MatriculaAulasEntity ma7 = new MatriculaAulasEntity(ap4, m7, 0); // Presente
+        MatriculaAulasEntity ma8 = new MatriculaAulasEntity(ap4, m8, 0); // Presente
+        MatriculaAulasEntity ma9 = new MatriculaAulasEntity(ap5, m9, 0); // Presente
+        MatriculaAulasEntity ma10 = new MatriculaAulasEntity(ap5, m10, 1); // Falta
+
+        presencas.add(ma1); presencas.add(ma2); presencas.add(ma3); presencas.add(ma4); presencas.add(ma5);
+        presencas.add(ma6); presencas.add(ma7); presencas.add(ma8); presencas.add(ma9); presencas.add(ma10);
 
         // 5. Instanciação de Diário de Bordo
         ArrayList<DiarioBordoEntity> diarios = new ArrayList<>();
         DiarioBordoEntity db1 = new DiarioBordoEntity(1, LocalDate.now(), (byte)1, "Comeu tudo", "Dormiu 1h", "Feliz", "Troca normal", "Muito participativo", m1, p1);
-        diarios.add(db1);
+        DiarioBordoEntity db2 = new DiarioBordoEntity(2, LocalDate.now(), (byte)1, "Recusou legumes", "Dormiu pouco", "Agitado", "Troca normal", "Brincou muito no parque", m2, p2);
+        DiarioBordoEntity db3 = new DiarioBordoEntity(3, LocalDate.now(), (byte)1, "Comeu bem", "Não dormiu", "Calmo", "Troca normal", "Concentrado na pintura", m3, p3);
+        DiarioBordoEntity db4 = new DiarioBordoEntity(4, LocalDate.now(), (byte)1, "Comeu tudo", "Dormiu 2h", "Radiante", "Troca normal", "Adora a roda de música", m4, p4);
+        DiarioBordoEntity db5 = new DiarioBordoEntity(5, LocalDate.now(), (byte)1, "Lanchou bem", "Dormiu 1h30", "Feliz", "Troca normal", "Interagiu com os colegas", m5, p5);
+        DiarioBordoEntity db6 = new DiarioBordoEntity(6, LocalDate.now(), (byte)1, "Comeu tudo", "Dormiu 1h", "Preguiçoso", "Troca normal", "Ficou quietinho hoje", m6, p6);
+        DiarioBordoEntity db7 = new DiarioBordoEntity(7, LocalDate.now(), (byte)1, "Recusou a fruta", "Não dormiu", "Choroso", "Troca normal", "Sentiu falta da mamãe", m7, p7);
+        DiarioBordoEntity db8 = new DiarioBordoEntity(8, LocalDate.now(), (byte)1, "Comeu bem", "Dormiu 1h", "Feliz", "Troca normal", "Muito interessado na história", m8, p8);
+        DiarioBordoEntity db9 = new DiarioBordoEntity(9, LocalDate.now(), (byte)1, "Comeu tudo", "Dormiu 2h", "Energético", "Troca normal", "Correu muito no pátio", m9, p9);
+        DiarioBordoEntity db10 = new DiarioBordoEntity(10, LocalDate.now(), (byte)1, "Comeu bem", "Dormiu 1h", "Tranquilo", "Troca normal", "Desenhou a família", m10, p10);
+        
+        diarios.add(db1); diarios.add(db2); diarios.add(db3); diarios.add(db4); diarios.add(db5);
+        diarios.add(db6); diarios.add(db7); diarios.add(db8); diarios.add(db9); diarios.add(db10);
 
         // =========================================================================
         // DEMONSTRAÇÃO DO SISTEMA COLMEIA GIRASSOL (ESTRUTURADA)

@@ -108,7 +108,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     <p class="text-muted small mb-3"><i class="fa-solid fa-calendar me-2"></i>${t.ano} — ${t.grau}</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <span class="badge bg-light text-dark-blue rounded-pill px-3">${t.alunosCount} Aluno${t.alunosCount !== 1 ? 's' : ''}</span>
-                        <button class="btn btn-sm text-danger" onclick="removerTurma(${t.id})"><i class="fa-solid fa-trash"></i></button>
+                        <div>
+                            <button class="btn btn-sm text-primary me-2" onclick="verTurmaDetalhes(${t.id})"><i class="fa-solid fa-eye"></i></button>
+                            <button class="btn btn-sm text-danger" onclick="removerTurma(${t.id})"><i class="fa-solid fa-trash"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -170,27 +173,90 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td><span class="badge badge-active px-3 py-2 rounded-pill">Ativo</span></td>
                 <td class="text-center">
                     <button class="btn btn-sm text-primary"><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button class="btn btn-sm text-danger"><i class="fa-solid fa-trash"></i></button>
+                    <button class="btn btn-sm text-danger" onclick="removerMatricula(${a.matriculaNr})"><i class="fa-solid fa-trash"></i></button>
                 </td>
             </tr>
         `).join('');
     }
 
-    // Ações Admin expostas globalmente
-    window.removerProfessor = function(id) {
-        if (!confirm('Remover este professor?')) return;
-        Database.remove('professores', id);
-        location.reload();
+    // --- Tabela de Responsáveis ---
+    const responsaveisTable = document.querySelector('#responsaveis-lista tbody');
+    if (responsaveisTable) {
+        renderResponsaveis();
+    }
+
+    function renderResponsaveis() {
+        const tbody = document.querySelector('#responsaveis-lista tbody');
+        if (!tbody) return;
+        const responsaveis = Database.get('responsaveis');
+        tbody.innerHTML = responsaveis.map(r => `
+            <tr>
+                <td><div class="fw-bold">${r.nome}</div><small class="text-muted">${r.estadoCivil}</small></td>
+                <td>${r.cpf}</td>
+                <td>${r.telefone}</td>
+                <td>${r.email}</td>
+                <td class="text-center">
+                    <button class="btn btn-sm text-primary"><i class="fa-solid fa-pen-to-square"></i></button>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    // --- Tabela de Diários (Admin) ---
+    const diariosAdminTable = document.querySelector('#diarios-lista tbody');
+    if (diariosAdminTable) {
+        renderDiariosAdmin();
+    }
+
+    function renderDiariosAdmin() {
+        const tbody = document.querySelector('#diarios-lista tbody');
+        if (!tbody) return;
+        const diarios = Database.getDiariosCompleto();
+        tbody.innerHTML = diarios.map(d => `
+            <tr>
+                <td>${fmtData(d.dataRegistro)}</td>
+                <td>${d.aluno?.nome ?? '—'}</td>
+                <td><span class="badge bg-light text-dark-blue">${d.humor}</span></td>
+                <td>${d.alimentacao}</td>
+                <td>${d.professor?.nome ?? '—'}</td>
+                <td class="text-center">
+                    <button class="btn btn-sm text-primary"><i class="fa-solid fa-file-lines"></i></button>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    // --- Ações Admin expostas globalmente ---
+    window.removerProfessor = function() {
+        alert('Esta função de exclusão está desativada para esta versão de demonstração.');
     };
-    window.removerTurma = function(id) {
-        if (!confirm('Remover esta turma?')) return;
-        Database.remove('turmas', id);
-        renderTurmas();
+
+    window.removerTurma = function() {
+        alert('Esta função de exclusão está desativada para esta versão de demonstração.');
     };
-    window.removerMatricula = function(nr) {
-        if (!confirm('Remover esta matrícula?')) return;
-        Database.remove('matriculas', nr);
-        renderMatriculas();
+
+    window.removerMatricula = function() {
+        alert('Esta função de exclusão está desativada para esta versão de demonstração.');
+    };
+
+    window.verTurmaDetalhes = function(id) {
+        const turma = Database.getTurma(id);
+        if (!turma) return;
+        document.getElementById('modalTurmaNome').textContent = 'Turma: ' + turma.nomeTurma;
+        document.getElementById('modalTurmaProf').textContent = 'Prof. ' + turma.professor;
+        document.getElementById('modalTurmaInfo').textContent = `${turma.ano} — ${turma.grau}`;
+        
+        const alunos = Database.getAlunosPorTurma(id);
+        const tbody = document.getElementById('modalTurmaAlunos');
+        tbody.innerHTML = alunos.map(a => `
+            <tr>
+                <td>${a.nome}</td>
+                <td>${fmtData(a.dataNascimento)}</td>
+                <td>${a.responsavel?.nome ?? '—'}</td>
+            </tr>
+        `).join('') || '<tr><td colspan="3" class="text-center">Nenhum aluno matriculado.</td></tr>';
+        
+        new bootstrap.Modal(document.getElementById('modalTurmaDetalhes')).show();
     };
 
     // =========================================================================
@@ -265,12 +331,60 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="d-flex align-items-center gap-2">
                         <i class="fa-solid fa-users text-light-blue"></i>
                         <span class="small fw-bold">${p.turma}</span>
-                        <span class="text-muted small ms-auto"><i class="fa-solid fa-chalkboard-user me-1"></i>${p.professor}</span>
+                        <div class="ms-auto">
+                            <button class="btn btn-sm btn-outline-dark-blue rounded-pill px-3" onclick="abrirChamada(${p.id})">
+                                <i class="fa-solid fa-clipboard-check me-1"></i>Chamada
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         `).join('') : '<div class="col-12"><p class="text-muted">Nenhum planejamento cadastrado.</p></div>';
     }
+
+    window.abrirChamada = function(planoId) {
+        const plano = Database.getPlanejamentosCompleto().find(p => p.id === planoId);
+        if (!plano) return;
+        
+        document.getElementById('modalChamadaTitulo').textContent = 'Chamada: ' + plano.atividadeDinamica;
+        const presencas = Database.getPresencasPorAula(planoId);
+        const turmaAlunos = Database.getAlunosPorTurma(plano.turmaId);
+        
+        const tbody = document.getElementById('listaChamadaAlunos');
+        tbody.innerHTML = turmaAlunos.map(aluno => {
+            const presenca = presencas.find(p => p.aluno?.id === aluno.id);
+            const isPresente = presenca ? presenca.status === 0 : true;
+            return `
+                <tr>
+                    <td><div class="fw-bold">${aluno.nome}</div></td>
+                    <td class="text-center">
+                        <div class="form-check form-switch d-inline-block">
+                            <input class="form-check-input" type="checkbox" ${isPresente ? 'checked' : ''} onchange="togglePresenca(${planoId}, ${aluno.matriculaNr}, this.checked)">
+                        </div>
+                    </td>
+                    <td><span class="badge ${isPresente ? 'bg-green-light text-success' : 'bg-red-light text-danger'} rounded-pill">${isPresente ? 'Presente' : 'Falta'}</span></td>
+                </tr>
+            `;
+        }).join('');
+        
+        new bootstrap.Modal(document.getElementById('modalChamada')).show();
+    };
+
+    window.togglePresenca = function(planoId, matriculaNr, isPresente) {
+        let presencas = Database.get('presencas');
+        const index = presencas.findIndex(p => p.planejamentoId === planoId && p.matriculaNr === matriculaNr);
+        const status = isPresente ? 0 : 1;
+        
+        if (index > -1) {
+            presencas[index].status = status;
+        } else {
+            presencas.push({ planejamentoId: planoId, matriculaNr, status });
+        }
+        
+        Database.__dbState.presencas = presencas;
+        Database.persist();
+        abrirChamada(planoId); // Refresh modal
+    };
 
     // --- Minhas Turmas (lista de alunos) ---
     const minhasTurmasEl = document.getElementById('minhas-turmas-lista');
@@ -285,7 +399,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="table-responsive">
                     <table class="table table-hover align-middle mb-0">
                         <thead class="table-light">
-                            <tr><th>Aluno</th><th>Nasc.</th><th>Alergias</th><th>Necessidades</th><th>Responsável</th></tr>
+                            <tr><th>Aluno</th><th>Alergias</th><th>Necessidades</th><th>Responsável</th><th class="text-center">Ação</th></tr>
                         </thead>
                         <tbody>
                             ${alunos.map(a => `
@@ -296,10 +410,14 @@ document.addEventListener("DOMContentLoaded", function () {
                                             <span class="fw-bold">${a.nome}</span>
                                         </div>
                                     </td>
-                                    <td>${fmtData(a.dataNascimento)}</td>
-                                    <td>${a.alergias}</td>
-                                    <td>${a.necessidadesEspeciais}</td>
-                                    <td>${a.responsavel?.nome ?? '—'}</td>
+                                    <td><span class="small">${a.alergias}</span></td>
+                                    <td><span class="small">${a.necessidadesEspeciais}</span></td>
+                                    <td><span class="small">${a.responsavel?.nome ?? '—'}</span></td>
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-outline-primary rounded-pill px-3" onclick="abrirAutorizados(${a.id})">
+                                            <i class="fa-solid fa-id-card me-1"></i>Autorizados
+                                        </button>
+                                    </td>
                                 </tr>
                             `).join('')}
                         </tbody>
@@ -310,6 +428,36 @@ document.addEventListener("DOMContentLoaded", function () {
             minhasTurmasEl.innerHTML = '<p class="text-muted">Nenhuma turma atribuída.</p>';
         }
     }
+
+    window.abrirAutorizados = function(alunoId) {
+        const aluno = Database.getAlunosCompleto().find(a => a.id === alunoId);
+        if (!aluno) return;
+
+        document.getElementById('modalAutorizadosTitulo').textContent = 'Autorizados a Buscar: ' + aluno.nome;
+        const listaEl = document.getElementById('lista-autorizados-modal');
+        
+        // Simulação de busca de autorizados (Responsável + Autorizado específico)
+        const autorizados = [];
+        if (aluno.responsavel) autorizados.push({ ...aluno.responsavel, parentesco: aluno.grauParentesco || 'Responsável' });
+        if (aluno.autorizado) autorizados.push({ ...aluno.autorizado, parentesco: aluno.autorizado.grauParentesco || 'Autorizado' });
+
+        if (autorizados.length === 0) {
+            listaEl.innerHTML = '<p class="text-center text-muted">Nenhum autorizado cadastrado.</p>';
+        } else {
+            listaEl.innerHTML = autorizados.map(aut => `
+                <div class="d-flex align-items-center gap-3 mb-3 p-3 bg-light rounded-4">
+                    <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(aut.nome)}&background=2D4459&color=fff" class="rounded-circle" style="width:48px;">
+                    <div>
+                        <div class="fw-bold">${aut.nome}</div>
+                        <div class="small text-muted">${aut.parentesco} • CPF: ${aut.cpf}</div>
+                        <div class="small text-primary"><i class="fa-solid fa-phone me-1"></i>${aut.telefone}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        new bootstrap.Modal(document.getElementById('modalAutorizados')).show();
+    };
 
     // =========================================================================
     // DASHBOARD RESPONSÁVEL
@@ -458,4 +606,61 @@ document.addEventListener("DOMContentLoaded", function () {
             <p class="mb-0"><strong>Necessidades Especiais:</strong> ${alunoAtual.necessidadesEspeciais}</p>
         `;
     }
+
+    // =========================================================================
+    // LÓGICA DE ABAS (TABS) - DASHBOARD ADMIN
+    // =========================================================================
+    const navLinks = document.querySelectorAll('.nav-link-custom[data-section]');
+    const sections = document.querySelectorAll('.dashboard-section');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            const targetSectionId = this.getAttribute('data-section');
+            
+            // Remove active de todos os links e seções
+            navLinks.forEach(l => l.classList.remove('active'));
+            sections.forEach(s => s.classList.remove('active'));
+
+            // Adiciona active no link clicado e na seção alvo
+            this.classList.add('active');
+            const targetSection = document.getElementById(targetSectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                // Re-inicializa AOS para a nova seção visível
+                if (window.AOS) window.AOS.refresh();
+            }
+        });
+    });
+
+    // =========================================================================
+    // POPULAR SELECTS DOS FORMULÁRIOS ADMIN
+    // =========================================================================
+    function populateAdminSelects() {
+        const profSelect = document.getElementById('select-prof-turma');
+        if (profSelect) {
+            const professores = Database.get('professores');
+            profSelect.innerHTML = '<option value="" selected disabled>Escolha um Professor...</option>' + 
+                professores.map(p => `<option value="${p.id}">${p.nome}</option>`).join('');
+        }
+
+        const respSelect = document.getElementById('select-aluno-resp');
+        if (respSelect) {
+            const responsaveis = Database.get('responsaveis');
+            respSelect.innerHTML = '<option value="" selected disabled>Escolha um Responsável...</option>' + 
+                responsaveis.map(r => `<option value="${r.id}">${r.nome}</option>`).join('');
+        }
+
+        const alunoMatSelect = document.getElementById('select-aluno-mat');
+        const turmaMatSelect = document.getElementById('select-turma-mat');
+        if (alunoMatSelect && turmaMatSelect) {
+            const alunos = Database.get('alunos');
+            const turmas = Database.get('turmas');
+            alunoMatSelect.innerHTML = '<option value="" selected disabled>Escolha o Aluno...</option>' + 
+                alunos.map(a => `<option value="${a.id}">${a.nome}</option>`).join('');
+            turmaMatSelect.innerHTML = '<option value="" selected disabled>Escolha a Turma...</option>' + 
+                turmas.map(t => `<option value="${t.id}">${t.nomeTurma}</option>`).join('');
+        }
+    }
+
+    populateAdminSelects();
 });
