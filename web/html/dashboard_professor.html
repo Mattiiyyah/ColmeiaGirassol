@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal do Professor - Colmeia Girassol</title>
+    <link rel="icon" href="../img/abelha.png">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="../img/logo.png" alt="Logo" class="img-fluid mb-2" style="max-width: 120px;">
+                <h6 class="fw-bold text-white mb-0">Colmeia Girassol</h6>
+            </div>
+            <nav class="nav-menu">
+                <li class="nav-item"><a href="#" class="nav-link-custom active"><i class="fa-solid fa-house"></i><span>Início</span></a></li>
+                <li class="nav-item"><a href="#diario-bordo" class="nav-link-custom"><i class="fa-solid fa-book"></i><span>Diário de Bordo</span></a></li>
+                <li class="nav-item"><a href="#planejamento" class="nav-link-custom"><i class="fa-solid fa-calendar-plus"></i><span>Planejamento</span></a></li>
+                <li class="nav-item"><a href="#minhas-turmas" class="nav-link-custom"><i class="fa-solid fa-users"></i><span>Minha Turma</span></a></li>
+                <li class="nav-item mt-5"><a href="login.html" class="nav-link-custom text-danger"><i class="fa-solid fa-right-from-bracket"></i><span>Sair</span></a></li>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="dashboard-header" data-aos="fade-down">
+                <div>
+                    <h2 class="fw-bold text-dark-blue mb-0" id="saudacao-prof">Olá, Professor(a)</h2>
+                    <p class="text-muted">Tenha um ótimo dia de aula com seus pequenos!</p>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="text-end d-none d-md-block">
+                        <h6 class="fw-bold text-dark-blue mb-0" id="header-prof-nome">—</h6>
+                        <small class="text-muted" id="header-prof-info">—</small>
+                    </div>
+                    <img id="header-prof-avatar"
+                         src="https://ui-avatars.com/api/?name=Professor&background=7EC8D9&color=fff"
+                         alt="Professor" class="rounded-circle shadow-sm" style="width: 45px;">
+                </div>
+            </header>
+
+            <!-- Stats rápidos -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-blue-light text-primary"><i class="fa-solid fa-user-graduate"></i></div>
+                        <h3 class="fw-bold mb-0" id="stat-prof-alunos">—</h3>
+                        <p class="text-muted small mb-0">Alunos na Minha Turma</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-yellow-light text-warning"><i class="fa-solid fa-calendar-check"></i></div>
+                        <h3 class="fw-bold mb-0" id="stat-prof-planos">—</h3>
+                        <p class="text-muted small mb-0">Aulas Planejadas</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-green-light text-success"><i class="fa-solid fa-book-open"></i></div>
+                        <h3 class="fw-bold mb-0">1</h3>
+                        <p class="text-muted small mb-0">Registros no Diário</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diário de Bordo -->
+            <section id="diario-bordo" class="mb-5" data-aos="fade-up">
+                <div class="form-card">
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <div class="stat-icon bg-yellow-light text-warning mb-0"><i class="fa-solid fa-book"></i></div>
+                        <h4 class="fw-bold text-dark-blue mb-0">Novo Registro no Diário de Bordo</h4>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Selecionar Aluno</label>
+                            <select class="form-select rounded-3 shadow-sm" id="select-aluno-diario">
+                                <!-- render.js preenche com alunos da turma do professor -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label fw-bold">Humor</label>
+                            <select class="form-select rounded-3 shadow-sm" id="diario-humor">
+                                <option>Feliz</option>
+                                <option>Tranquilo</option>
+                                <option>Agitado</option>
+                                <option>Choroso</option>
+                                <option>Irritado</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label fw-bold">Alimentação</label>
+                            <select class="form-select rounded-3 shadow-sm" id="diario-alimentacao">
+                                <option>Comeu tudo</option>
+                                <option>Comeu bem</option>
+                                <option>Comeu pouco</option>
+                                <option>Recusou</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Sono</label>
+                            <input type="text" class="form-control rounded-3 shadow-sm" id="diario-sono" placeholder="Ex: Dormiu 1h30">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Troca / Banheiro</label>
+                            <input type="text" class="form-control rounded-3 shadow-sm" id="diario-fraldas" placeholder="Ex: Normal / 3 trocas">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Saúde / Medicamento</label>
+                            <input type="text" class="form-control rounded-3 shadow-sm" placeholder="Nenhuma observação">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label fw-bold">Observações do Dia</label>
+                            <textarea class="form-control rounded-3 shadow-sm" rows="3" id="diario-obs" placeholder="Conte como foi o desenvolvimento da criança hoje..."></textarea>
+                        </div>
+                        <div class="col-12 text-end mt-2">
+                            <button class="btn btn-custom btn-dark-blue rounded-pill px-5 shadow" onclick="salvarDiario()">
+                                <i class="fa-solid fa-paper-plane me-2"></i>Enviar para os Pais
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Planejamento de Aulas -->
+            <section id="planejamento" class="mb-5" data-aos="fade-up">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="fw-bold text-dark-blue mb-0">Planejamento de Aulas</h4>
+                    <button class="btn btn-light-blue rounded-pill px-4 shadow-sm" data-bs-toggle="modal" data-bs-target="#modalPlanejamento">
+                        <i class="fa-solid fa-plus me-2"></i>Nova Atividade
+                    </button>
+                </div>
+                <div class="row g-4">
+                    <!-- render.js preenche com Database.getPlanejamentosCompleto() -->
+                </div>
+            </section>
+
+            <!-- Minha Turma -->
+            <section id="minhas-turmas" class="mb-5" data-aos="fade-up">
+                <h4 class="fw-bold text-dark-blue mb-4">Minha Turma</h4>
+                <div class="form-card" id="minhas-turmas-lista">
+                    <div class="text-center py-4 text-muted">
+                        <span class="spinner-border spinner-border-sm me-2"></span>Carregando...
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal Planejamento -->
+    <div class="modal fade" id="modalPlanejamento" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 rounded-4 shadow">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="fw-bold text-dark-blue">Planejar Nova Aula</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Atividade / Título</label>
+                        <input type="text" class="form-control rounded-3" id="plano-titulo" placeholder="Ex: Aula de Artes">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Descrição da Dinâmica</label>
+                        <textarea class="form-control rounded-3" rows="3" id="plano-desc"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Data</label>
+                            <input type="date" class="form-control rounded-3" id="plano-data">
+                        </div>
+                    </div>
+                    <button class="btn btn-yellow-main w-100 rounded-pill py-2 fw-bold mt-2" onclick="salvarPlanejamento()">
+                        Salvar Planejamento
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de sucesso -->
+    <div class="modal fade" id="modalSucesso" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content border-0 rounded-4 shadow text-center p-4">
+                <i class="fa-solid fa-circle-check text-success fs-1 mb-3"></i>
+                <h5 class="fw-bold text-dark-blue" id="modal-sucesso-msg">Salvo com sucesso!</h5>
+                <button class="btn btn-dark-blue rounded-pill px-4 mt-2" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/database.js"></script>
+    <script src="../js/render.js"></script>
+    <script>
+        function mostrarSucesso(msg) {
+            document.getElementById('modal-sucesso-msg').textContent = msg || 'Salvo com sucesso!';
+            new bootstrap.Modal(document.getElementById('modalSucesso')).show();
+        }
+
+        function salvarDiario() {
+            const alunoId = parseInt(document.getElementById('select-aluno-diario').value);
+            const humor = document.getElementById('diario-humor').value;
+            const alimentacao = document.getElementById('diario-alimentacao').value;
+            const sono = document.getElementById('diario-sono').value || '—';
+            const fraldas = document.getElementById('diario-fraldas').value || '—';
+            const obs = document.getElementById('diario-obs').value || '';
+
+            // Encontra a matrícula do aluno
+            const matricula = Database.get('matriculas').find(m => m.alunoId === alunoId);
+            const professor = Database.get('professores')[0]; // fallback
+
+            Database.save('diarios', {
+                dataRegistro: new Date().toISOString().split('T')[0],
+                refeicao: 1,
+                alimentacao,
+                sono,
+                humor,
+                fraldas,
+                observacoes: obs,
+                matriculaNr: matricula?.nr ?? 101,
+                professorId: professor?.id ?? 1
+            });
+            mostrarSucesso('Diário enviado para os pais!');
+        }
+
+        function salvarPlanejamento() {
+            const titulo = document.getElementById('plano-titulo').value.trim();
+            const desc = document.getElementById('plano-desc').value.trim();
+            const data = document.getElementById('plano-data').value;
+            if (!titulo) { alert('Informe o título da atividade.'); return; }
+
+            const professor = Database.get('professores')[0];
+            const turma = professor ? Database.get('turmas').find(t => t.professorId === professor.id) : null;
+
+            Database.save('planejamentos', {
+                dataAula: data || new Date().toISOString().split('T')[0],
+                atividadeDinamica: titulo,
+                descricao: desc,
+                status: 0,
+                professorId: professor?.id ?? 1,
+                turmaId: turma?.id ?? 1
+            });
+            bootstrap.Modal.getInstance(document.getElementById('modalPlanejamento'))?.hide();
+            mostrarSucesso('Planejamento salvo!');
+            setTimeout(() => location.reload(), 1200);
+        }
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init();</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
