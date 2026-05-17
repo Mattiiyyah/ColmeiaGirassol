@@ -343,6 +343,11 @@ html, body {
     -webkit-overflow-scrolling: touch;
 }
 
+.table-custom table,
+.table-responsive table {
+    min-width: 800px;
+}
+
 .table-custom thead {
     background-color: var(--light-blue-pale);
 }
