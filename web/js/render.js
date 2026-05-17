@@ -621,8 +621,12 @@ document.addEventListener("DOMContentLoaded", function () {
             navLinks.forEach(l => l.classList.remove('active'));
             sections.forEach(s => s.classList.remove('active'));
 
-            // Adiciona active no link clicado e na seção alvo
-            this.classList.add('active');
+            // Adiciona active nos links clicados/correspondentes e na seção alvo
+            navLinks.forEach(l => {
+                if (l.getAttribute('data-section') === targetSectionId) {
+                    l.classList.add('active');
+                }
+            });
             const targetSection = document.getElementById(targetSectionId);
             if (targetSection) {
                 targetSection.classList.add('active');

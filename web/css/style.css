@@ -287,6 +287,7 @@ body {
     text-decoration: none;
     border-radius: 10px;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .nav-link-custom i {
@@ -372,6 +373,9 @@ body {
 }
 
 @media (max-width: 992px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
     .sidebar {
         width: 80px;
         padding: 2rem 0.5rem;
@@ -383,6 +387,10 @@ body {
         margin-right: 0;
         width: 100%;
         text-align: center;
+    }
+    .main-content {
+        padding: 1.5rem 1rem;
+        max-height: none;
     }
 }
 
@@ -433,4 +441,30 @@ body {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+/* Custom Mobile Dropdown Styling */
+.navbar .dropdown-menu {
+    background-color: var(--dark-blue) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 0.5rem !important;
+}
+
+.navbar .dropdown-menu .nav-link-custom {
+    color: rgba(255, 255, 255, 0.8) !important;
+    background: transparent !important;
+    padding: 0.6rem 1rem !important;
+    border-radius: 8px !important;
+    margin-bottom: 2px !important;
+}
+
+.navbar .dropdown-menu .nav-link-custom:hover,
+.navbar .dropdown-menu .nav-link-custom.active {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: var(--yellow-main) !important;
+}
+
+.navbar .dropdown-menu .dropdown-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    margin: 0.5rem 0 !important;
 }
