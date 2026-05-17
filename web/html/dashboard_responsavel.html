@@ -60,6 +60,12 @@
                     <div class="d-flex justify-content-center gap-2 mt-4">
                         <span class="badge bg-green-light text-success px-3 py-2 rounded-pill">Presente Hoje</span>
                     </div>
+                    
+                    <div class="px-3 mt-3">
+                        <button class="btn btn-outline-primary btn-sm rounded-pill w-100 fw-bold py-2 shadow-sm" data-bs-toggle="modal" data-bs-target="#modalPreMatricula">
+                            <i class="fa-solid fa-plus me-1"></i> Matricular Outro Filho
+                        </button>
+                    </div>
 
                     <hr class="my-4 opacity-10">
 
@@ -154,6 +160,46 @@
                     <button class="btn btn-yellow-main w-100 rounded-pill py-2 fw-bold mt-2 shadow-sm" onclick="salvarAutorizado()">
                         Confirmar Autorização
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Pré-Matrícula de Novo Filho -->
+    <div class="modal fade" id="modalPreMatricula" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 rounded-4 shadow">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="fw-bold text-dark-blue"><i class="fa-solid fa-baby-carriage me-2 text-warning"></i>Pré-Matrícula de Novo Filho</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="text-muted small mb-4">Como você já está logado(a), os dados de responsável serão vinculados automaticamente.</p>
+                    <form id="preMatriculaForm">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Nome do Filho(a)</label>
+                            <input type="text" class="form-control rounded-3" id="filho-nome" placeholder="Ex: Lucas Silva" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Data de Nascimento</label>
+                            <input type="date" class="form-control rounded-3" id="filho-nascimento" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Alergias</label>
+                            <input type="text" class="form-control rounded-3" id="filho-alergias" placeholder="Deixe em branco se não houver">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Restrições Alimentares</label>
+                            <input type="text" class="form-control rounded-3" id="filho-restricoes" placeholder="Deixe em branco se não houver">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Necessidades Especiais</label>
+                            <textarea class="form-control rounded-3" id="filho-necessidades" rows="2" placeholder="Descreva se houver alguma necessidade especial"></textarea>
+                        </div>
+                        <button type="button" class="btn btn-yellow-main w-100 rounded-pill py-2 fw-bold mt-3 shadow-sm" onclick="enviarPreMatriculaFilho()">
+                            Enviar Pré-Matrícula
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

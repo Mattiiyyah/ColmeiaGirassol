@@ -428,11 +428,17 @@
 
         function salvarTurma() {
             const v1 = validarCampo('nova-turma-nome');
-            const profId = document.getElementById('select-prof-turma').value;
+            const profSelect = document.getElementById('select-prof-turma');
+            const profId = profSelect.value;
+            
+            if (!profId) {
+                profSelect.classList.add('is-invalid');
+            } else {
+                profSelect.classList.remove('is-invalid');
+            }
             
             if (!v1 || !profId) {
-                if (!v1) document.getElementById('nova-turma-nome').classList.add('is-invalid');
-                alert('Informe o nome da turma e selecione um professor.');
+                alert('Por favor, informe o nome da turma e selecione um professor.');
                 return;
             }
 
@@ -449,10 +455,17 @@
 
         function salvarAluno() {
             const v1 = validarCampo('novo-aluno-nome');
-            const respId = document.getElementById('select-aluno-resp').value;
+            const respSelect = document.getElementById('select-aluno-resp');
+            const respId = respSelect.value;
+            
+            if (!respId) {
+                respSelect.classList.add('is-invalid');
+            } else {
+                respSelect.classList.remove('is-invalid');
+            }
             
             if (!v1 || !respId) {
-                alert('Informe o nome do aluno e selecione um responsável.');
+                alert('Por favor, informe o nome do aluno e selecione um responsável.');
                 return;
             }
 
@@ -470,11 +483,25 @@
         }
 
         function salvarMatricula() {
-            const alunoId = document.getElementById('select-aluno-mat').value;
-            const turmaId = document.getElementById('select-turma-mat').value;
+            const alunoSelect = document.getElementById('select-aluno-mat');
+            const turmaSelect = document.getElementById('select-turma-mat');
+            const alunoId = alunoSelect.value;
+            const turmaId = turmaSelect.value;
+            
+            if (!alunoId) {
+                alunoSelect.classList.add('is-invalid');
+            } else {
+                alunoSelect.classList.remove('is-invalid');
+            }
+
+            if (!turmaId) {
+                turmaSelect.classList.add('is-invalid');
+            } else {
+                turmaSelect.classList.remove('is-invalid');
+            }
             
             if (!alunoId || !turmaId) {
-                alert('Selecione um aluno e uma turma.');
+                alert('Por favor, selecione um aluno e uma turma.');
                 return;
             }
 
@@ -488,6 +515,18 @@
             Database.save('matriculas', data);
             location.reload();
         }
+
+        // Limpar validações vermelhas em tempo real ao interagir
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('input, select, textarea').forEach(el => {
+                el.addEventListener('input', function() {
+                    if (this.value.trim()) this.classList.remove('is-invalid');
+                });
+                el.addEventListener('change', function() {
+                    if (this.value) this.classList.remove('is-invalid');
+                });
+            });
+        });
     </script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>AOS.init();</script>

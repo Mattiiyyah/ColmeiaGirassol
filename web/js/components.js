@@ -40,8 +40,8 @@ document.addEventListener("DOMContentLoaded", function() {
     </footer>
 
     <!-- Botão Flutuante WhatsApp -->
-    <a href="https://wa.me/5517992732872?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20escola." target="_blank" class="position-fixed bottom-0 end-0 m-4 text-white rounded-circle d-flex align-items-center justify-content-center shadow-lg text-decoration-none" style="background-color: #25D366; width: 60px; height: 60px; z-index: 1000; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-        <i class="fa-brands fa-whatsapp fs-1"></i>
+    <a href="https://wa.me/5517992732872?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20escola." target="_blank" class="btn-whatsapp-float">
+        <i class="fa-brands fa-whatsapp"></i>
     </a>
     `;
     

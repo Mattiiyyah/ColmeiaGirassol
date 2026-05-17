@@ -667,4 +667,204 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     populateAdminSelects();
+
+    window.enviarPreMatriculaFilho = function() {
+        const nome = document.getElementById('filho-nome').value.trim();
+        const nascimento = document.getElementById('filho-nascimento').value;
+        
+        let valido = true;
+        if (!nome) {
+            document.getElementById('filho-nome').classList.add('is-invalid');
+            valido = false;
+        }
+        if (!nascimento) {
+            document.getElementById('filho-nascimento').classList.add('is-invalid');
+            valido = false;
+        }
+
+        if (!valido) {
+            alert("Por favor, preencha o Nome e a Data de Nascimento.");
+            return;
+        }
+
+        // Fecha o modal de pre-matricula
+        const modalEl = document.getElementById('modalPreMatricula');
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        if (modal) modal.hide();
+
+        // Mostra o modal de sucesso com mensagem personalizada
+        const successModalEl = document.getElementById('modalSucesso');
+        const msgEl = document.getElementById('modal-sucesso-msg');
+        if (msgEl) msgEl.textContent = "Pré-matrícula enviada com sucesso!";
+        
+        const successModal = new bootstrap.Modal(successModalEl);
+        successModal.show();
+
+        // Limpa o formulario
+        const form = document.getElementById('preMatriculaForm');
+        if (form) form.reset();
+    };
+
+    window.salvarDiario = function() {
+        const alunoSelect = document.getElementById('select-aluno-diario');
+        const obsTextarea = document.getElementById('diario-obs');
+        
+        let valido = true;
+        if (!alunoSelect || !alunoSelect.value) {
+            if (alunoSelect) alunoSelect.classList.add('is-invalid');
+            valido = false;
+        } else {
+            if (alunoSelect) alunoSelect.classList.remove('is-invalid');
+        }
+
+        if (!obsTextarea || !obsTextarea.value.trim()) {
+            if (obsTextarea) obsTextarea.classList.add('is-invalid');
+            valido = false;
+        } else {
+            if (obsTextarea) obsTextarea.classList.remove('is-invalid');
+        }
+
+        if (!valido) {
+            alert("Por favor, preencha todos os campos obrigatórios em vermelho.");
+            return;
+        }
+
+        // Mostra o modal de sucesso com mensagem personalizada
+        const successModalEl = document.getElementById('modalSucesso');
+        const msgEl = document.getElementById('modal-sucesso-msg');
+        if (msgEl) msgEl.textContent = "Diário de bordo enviado com sucesso!";
+        
+        const successModal = new bootstrap.Modal(successModalEl);
+        successModal.show();
+
+        // Limpa observações e inputs adicionais
+        if (obsTextarea) obsTextarea.value = "";
+        const sonoInput = document.getElementById('diario-sono');
+        if (sonoInput) sonoInput.value = "";
+        const fraldasInput = document.getElementById('diario-fraldas');
+        if (fraldasInput) fraldasInput.value = "";
+    };
+
+    window.salvarPlanejamento = function() {
+        const tituloInput = document.getElementById('plano-titulo');
+        const descTextarea = document.getElementById('plano-desc');
+        const dataInput = document.getElementById('plano-data');
+        
+        let valido = true;
+        
+        if (!tituloInput || !tituloInput.value.trim()) {
+            if (tituloInput) tituloInput.classList.add('is-invalid');
+            valido = false;
+        } else {
+            if (tituloInput) tituloInput.classList.remove('is-invalid');
+        }
+
+        if (!descTextarea || !descTextarea.value.trim()) {
+            if (descTextarea) descTextarea.classList.add('is-invalid');
+            valido = false;
+        } else {
+            if (descTextarea) descTextarea.classList.remove('is-invalid');
+        }
+
+        if (!dataInput || !dataInput.value) {
+            if (dataInput) dataInput.classList.add('is-invalid');
+            valido = false;
+        } else {
+            if (dataInput) dataInput.classList.remove('is-invalid');
+        }
+
+        if (!valido) {
+            alert("Por favor, preencha todos os campos obrigatórios em vermelho.");
+            return;
+        }
+
+        // Fecha o modal de planejamento
+        const modalEl = document.getElementById('modalPlanejamento');
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        if (modal) modal.hide();
+
+        // Mostra o modal de sucesso com mensagem personalizada
+        const successModalEl = document.getElementById('modalSucesso');
+        const msgEl = document.getElementById('modal-sucesso-msg');
+        if (msgEl) msgEl.textContent = "Planejamento salvo com sucesso!";
+        
+        const successModal = new bootstrap.Modal(successModalEl);
+        successModal.show();
+
+        // Limpa campos
+        if (tituloInput) tituloInput.value = "";
+        if (descTextarea) descTextarea.value = "";
+        if (dataInput) dataInput.value = "";
+    };
+
+    window.salvarAutorizado = function() {
+        const nomeInput = document.getElementById('aut-nome');
+        const cpfInput = document.getElementById('aut-cpf');
+        const parentescoInput = document.getElementById('aut-parentesco');
+        const telInput = document.getElementById('aut-telefone');
+        
+        let valido = true;
+        
+        if (!nomeInput || !nomeInput.value.trim()) {
+            if (nomeInput) nomeInput.classList.add('is-invalid');
+            valido = false;
+        } else {
+            if (nomeInput) nomeInput.classList.remove('is-invalid');
+        }
+
+        if (!cpfInput || !cpfInput.value.trim()) {
+            if (cpfInput) cpfInput.classList.add('is-invalid');
+            valido = false;
+        } else {
+            if (cpfInput) cpfInput.classList.remove('is-invalid');
+        }
+
+        if (!parentescoInput || !parentescoInput.value.trim()) {
+            if (parentescoInput) parentescoInput.classList.add('is-invalid');
+            valido = false;
+        } else {
+            if (parentescoInput) parentescoInput.classList.remove('is-invalid');
+        }
+
+        if (!telInput || !telInput.value.trim()) {
+            if (telInput) telInput.classList.add('is-invalid');
+            valido = false;
+        } else {
+            if (telInput) telInput.classList.remove('is-invalid');
+        }
+
+        if (!valido) {
+            alert("Por favor, preencha todos os campos obrigatórios em vermelho.");
+            return;
+        }
+
+        // Fecha o modal de autorizado
+        const modalEl = document.getElementById('modalAutorizado');
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        if (modal) modal.hide();
+
+        // Mostra o modal de sucesso com mensagem personalizada
+        const successModalEl = document.getElementById('modalSucesso');
+        const msgEl = document.getElementById('modal-sucesso-msg');
+        if (msgEl) msgEl.textContent = "Nova pessoa autorizada com sucesso!";
+        
+        const successModal = new bootstrap.Modal(successModalEl);
+        successModal.show();
+
+        // Limpa campos
+        if (nomeInput) nomeInput.value = "";
+        if (cpfInput) cpfInput.value = "";
+        if (parentescoInput) parentescoInput.value = "";
+        if (telInput) telInput.value = "";
+    };
+
+    // Limpar validações vermelhas em tempo real ao interagir (para todos os painéis)
+    document.querySelectorAll('input, select, textarea').forEach(el => {
+        el.addEventListener('input', function() {
+            if (this.value.trim()) this.classList.remove('is-invalid');
+        });
+        el.addEventListener('change', function() {
+            if (this.value) this.classList.remove('is-invalid');
+        });
+    });
 });
