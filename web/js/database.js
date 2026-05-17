@@ -3,6 +3,14 @@
 // Estrutura fiel às entidades Java do projeto Colmeia Girassol
 // =============================================================================
 
+// Utilitários de Data Dinâmica para manter o sistema atualizado em 2026 e nos anos seguintes
+const currentYearStr = new Date().getFullYear().toString();
+const getRelativeDate = (offsetDays) => {
+    const d = new Date();
+    d.setDate(d.getDate() + offsetDays);
+    return d.toISOString().split('T')[0];
+};
+
 window.db_mock = {
 
     responsaveis: [
@@ -59,59 +67,59 @@ window.db_mock = {
     ],
 
     turmas: [
-        { id: 1,  nomeTurma: "Berçário I",    ano: "2024", grau: "Berçário", professorId: 1  },
-        { id: 2,  nomeTurma: "Berçário II",   ano: "2024", grau: "Berçário", professorId: 2  },
-        { id: 3,  nomeTurma: "Maternal I-A",  ano: "2024", grau: "Infantil", professorId: 3  },
-        { id: 4,  nomeTurma: "Maternal I-B",  ano: "2024", grau: "Infantil", professorId: 4  },
-        { id: 5,  nomeTurma: "Maternal II-A", ano: "2024", grau: "Infantil", professorId: 5  },
-        { id: 6,  nomeTurma: "Maternal II-B", ano: "2024", grau: "Infantil", professorId: 6  },
-        { id: 7,  nomeTurma: "Etapa 1-A",     ano: "2024", grau: "Infantil", professorId: 7  },
-        { id: 8,  nomeTurma: "Etapa 1-B",     ano: "2024", grau: "Infantil", professorId: 8  },
-        { id: 9,  nomeTurma: "Etapa 2-A",     ano: "2024", grau: "Infantil", professorId: 9  },
-        { id: 10, nomeTurma: "Etapa 2-B",     ano: "2024", grau: "Infantil", professorId: 10 }
+        { id: 1,  nomeTurma: "Berçário I",    ano: currentYearStr, grau: "Berçário", professorId: 1  },
+        { id: 2,  nomeTurma: "Berçário II",   ano: currentYearStr, grau: "Berçário", professorId: 2  },
+        { id: 3,  nomeTurma: "Maternal I-A",  ano: currentYearStr, grau: "Infantil", professorId: 3  },
+        { id: 4,  nomeTurma: "Maternal I-B",  ano: currentYearStr, grau: "Infantil", professorId: 4  },
+        { id: 5,  nomeTurma: "Maternal II-A", ano: currentYearStr, grau: "Infantil", professorId: 5  },
+        { id: 6,  nomeTurma: "Maternal II-B", ano: currentYearStr, grau: "Infantil", professorId: 6  },
+        { id: 7,  nomeTurma: "Etapa 1-A",     ano: currentYearStr, grau: "Infantil", professorId: 7  },
+        { id: 8,  nomeTurma: "Etapa 1-B",     ano: currentYearStr, grau: "Infantil", professorId: 8  },
+        { id: 9,  nomeTurma: "Etapa 2-A",     ano: currentYearStr, grau: "Infantil", professorId: 9  },
+        { id: 10, nomeTurma: "Etapa 2-B",     ano: currentYearStr, grau: "Infantil", professorId: 10 }
     ],
 
     // MatriculaEntity: nr, dataMatricula, status, alunoId, turmaId
     // Turma 1 (Berçário I): matrículas 101-105 | Turma 2 (Berçário II): matrículas 106-110
     matriculas: [
-        { nr: 101, dataMatricula: "2024-01-01", status: 0, alunoId: 1,  turmaId: 1 },
-        { nr: 102, dataMatricula: "2024-01-01", status: 0, alunoId: 2,  turmaId: 1 },
-        { nr: 103, dataMatricula: "2024-01-01", status: 0, alunoId: 3,  turmaId: 1 },
-        { nr: 104, dataMatricula: "2024-01-01", status: 0, alunoId: 4,  turmaId: 1 },
-        { nr: 105, dataMatricula: "2024-01-01", status: 0, alunoId: 5,  turmaId: 1 },
-        { nr: 106, dataMatricula: "2024-01-01", status: 0, alunoId: 6,  turmaId: 2 },
-        { nr: 107, dataMatricula: "2024-01-01", status: 0, alunoId: 7,  turmaId: 2 },
-        { nr: 108, dataMatricula: "2024-01-01", status: 0, alunoId: 8,  turmaId: 2 },
-        { nr: 109, dataMatricula: "2024-01-01", status: 0, alunoId: 9,  turmaId: 2 },
-        { nr: 110, dataMatricula: "2024-01-01", status: 0, alunoId: 10, turmaId: 2 }
+        { nr: 101, dataMatricula: currentYearStr + "-01-01", status: 0, alunoId: 1,  turmaId: 1 },
+        { nr: 102, dataMatricula: currentYearStr + "-01-01", status: 0, alunoId: 2,  turmaId: 1 },
+        { nr: 103, dataMatricula: currentYearStr + "-01-01", status: 0, alunoId: 3,  turmaId: 1 },
+        { nr: 104, dataMatricula: currentYearStr + "-01-01", status: 0, alunoId: 4,  turmaId: 1 },
+        { nr: 105, dataMatricula: currentYearStr + "-01-01", status: 0, alunoId: 5,  turmaId: 1 },
+        { nr: 106, dataMatricula: currentYearStr + "-01-01", status: 0, alunoId: 6,  turmaId: 2 },
+        { nr: 107, dataMatricula: currentYearStr + "-01-01", status: 0, alunoId: 7,  turmaId: 2 },
+        { nr: 108, dataMatricula: currentYearStr + "-01-01", status: 0, alunoId: 8,  turmaId: 2 },
+        { nr: 109, dataMatricula: currentYearStr + "-01-01", status: 0, alunoId: 9,  turmaId: 2 },
+        { nr: 110, dataMatricula: currentYearStr + "-01-01", status: 0, alunoId: 10, turmaId: 2 }
     ],
 
     // AulasPlanejamentoEntity: status 0=Agendado, 1=Concluído
     planejamentos: [
-        { id: 1,  dataAula: "2024-05-16", atividadeDinamica: "Pintura a Dedo",          descricao: "Atividade criativa com tintas",          status: 1, professorId: 1,  turmaId: 1  },
-        { id: 2,  dataAula: "2024-05-17", atividadeDinamica: "Roda de Cantiga",         descricao: "Cantar músicas infantis",                status: 0, professorId: 2,  turmaId: 2  },
-        { id: 3,  dataAula: "2024-05-18", atividadeDinamica: "Contação de Histórias",   descricao: "Leitura de contos clássicos",            status: 0, professorId: 3,  turmaId: 3  },
-        { id: 4,  dataAula: "2024-05-19", atividadeDinamica: "Brincadeiras de Roda",    descricao: "Interação social com música",            status: 0, professorId: 4,  turmaId: 4  },
-        { id: 5,  dataAula: "2024-05-20", atividadeDinamica: "Aula de Natureza",        descricao: "Exploração do jardim",                  status: 0, professorId: 5,  turmaId: 5  },
-        { id: 6,  dataAula: "2024-05-21", atividadeDinamica: "Matemática Divertida",    descricao: "Contagem com objetos",                  status: 0, professorId: 6,  turmaId: 6  },
-        { id: 7,  dataAula: "2024-05-22", atividadeDinamica: "Expressão Corporal",      descricao: "Dança e movimentos",                    status: 0, professorId: 7,  turmaId: 7  },
-        { id: 8,  dataAula: "2024-05-23", atividadeDinamica: "Iniciação ao Inglês",     descricao: "Cores e saudações em inglês",            status: 0, professorId: 8,  turmaId: 8  },
-        { id: 9,  dataAula: "2024-05-24", atividadeDinamica: "Experiências Científicas",descricao: "Mistura de cores e texturas",            status: 0, professorId: 9,  turmaId: 9  },
-        { id: 10, dataAula: "2024-05-25", atividadeDinamica: "Atividade Sensorial",     descricao: "Explorando diferentes materiais",       status: 0, professorId: 10, turmaId: 10 }
+        { id: 1,  dataAula: getRelativeDate(-1), atividadeDinamica: "Pintura a Dedo",          descricao: "Atividade criativa com tintas",          status: 1, professorId: 1,  turmaId: 1  },
+        { id: 2,  dataAula: getRelativeDate(0),  atividadeDinamica: "Roda de Cantiga",         descricao: "Cantar músicas infantis",                status: 0, professorId: 2,  turmaId: 2  },
+        { id: 3,  dataAula: getRelativeDate(1),  atividadeDinamica: "Contação de Histórias",   descricao: "Leitura de contos clássicos",            status: 0, professorId: 3,  turmaId: 3  },
+        { id: 4,  dataAula: getRelativeDate(2),  atividadeDinamica: "Brincadeiras de Roda",    descricao: "Interação social com música",            status: 0, professorId: 4,  turmaId: 4  },
+        { id: 5,  dataAula: getRelativeDate(3),  atividadeDinamica: "Aula de Natureza",        descricao: "Exploração do jardim",                  status: 0, professorId: 5,  turmaId: 5  },
+        { id: 6,  dataAula: getRelativeDate(4),  atividadeDinamica: "Matemática Divertida",    descricao: "Contagem com objects",                   status: 0, professorId: 6,  turmaId: 6  },
+        { id: 7,  dataAula: getRelativeDate(5),  atividadeDinamica: "Expressão Corporal",      descricao: "Dança e movimentos",                    status: 0, professorId: 7,  turmaId: 7  },
+        { id: 8,  dataAula: getRelativeDate(6),  atividadeDinamica: "Iniciação ao Inglês",     descricao: "Cores e saudações em inglês",            status: 0, professorId: 8,  turmaId: 8  },
+        { id: 9,  dataAula: getRelativeDate(7),  atividadeDinamica: "Experiências Científicas",descricao: "Mistura de cores e texturas",            status: 0, professorId: 9,  turmaId: 9  },
+        { id: 10, dataAula: getRelativeDate(8),  atividadeDinamica: "Atividade Sensorial",     descricao: "Explorando diferentes materiais",       status: 0, professorId: 10, turmaId: 10 }
     ],
 
     // DiarioBordoEntity: matriculaNr referencia MatriculaEntity
     diarios: [
-        { id: 1,  dataRegistro: "2024-05-16", refeicao: 1, alimentacao: "Comeu tudo",      sono: "Dormiu 1h",   humor: "Feliz",      fraldas: "Troca normal", observacoes: "Muito participativo", matriculaNr: 101, professorId: 1 },
-        { id: 2,  dataRegistro: "2024-05-16", refeicao: 1, alimentacao: "Recusou legumes", sono: "Dormiu pouco", humor: "Agitado",    fraldas: "Troca normal", observacoes: "Brincou muito no parque", matriculaNr: 102, professorId: 2 },
-        { id: 3,  dataRegistro: "2024-05-16", refeicao: 1, alimentacao: "Comeu bem",       sono: "Não dormiu",   humor: "Calmo",      fraldas: "Troca normal", observacoes: "Concentrado na pintura", matriculaNr: 103, professorId: 3 },
-        { id: 4,  dataRegistro: "2024-05-16", refeicao: 1, alimentacao: "Comeu tudo",      sono: "Dormiu 2h",   humor: "Radiante",   fraldas: "Troca normal", observacoes: "Adora a roda de música", matriculaNr: 104, professorId: 4 },
-        { id: 5,  dataRegistro: "2024-05-16", refeicao: 1, alimentacao: "Lanchou bem",      sono: "Dormiu 1h30", humor: "Feliz",      fraldas: "Troca normal", observacoes: "Interagiu com os colegas", matriculaNr: 105, professorId: 5 },
-        { id: 6,  dataRegistro: "2024-05-16", refeicao: 1, alimentacao: "Comeu tudo",      sono: "Dormiu 1h",   humor: "Preguiçoso", fraldas: "Troca normal", observacoes: "Ficou quietinho hoje", matriculaNr: 106, professorId: 6 },
-        { id: 7,  dataRegistro: "2024-05-16", refeicao: 1, alimentacao: "Recusou a fruta",  sono: "Não dormiu",   humor: "Choroso",    fraldas: "Troca normal", observacoes: "Sentiu falta da mamãe", matriculaNr: 107, professorId: 7 },
-        { id: 8,  dataRegistro: "2024-05-16", refeicao: 1, alimentacao: "Comeu bem",       sono: "Dormiu 1h",   humor: "Feliz",      fraldas: "Troca normal", observacoes: "Muito interessado na história", matriculaNr: 108, professorId: 8 },
-        { id: 9,  dataRegistro: "2024-05-16", refeicao: 1, alimentacao: "Comeu tudo",      sono: "Dormiu 2h",   humor: "Energético", fraldas: "Troca normal", observacoes: "Correu muito no pátio", matriculaNr: 109, professorId: 9 },
-        { id: 10, dataRegistro: "2024-05-16", refeicao: 1, alimentacao: "Comeu bem",       sono: "Dormiu 1h",   humor: "Tranquilo",  fraldas: "Troca normal", observacoes: "Desenhou a família", matriculaNr: 110, professorId: 10 }
+        { id: 1,  dataRegistro: getRelativeDate(-1), refeicao: 1, alimentacao: "Comeu tudo",      sono: "Dormiu 1h",   humor: "Feliz",      fraldas: "Troca normal", observacoes: "Muito participativo", matriculaNr: 101, professorId: 1 },
+        { id: 2,  dataRegistro: getRelativeDate(-1), refeicao: 1, alimentacao: "Recusou legumes", sono: "Dormiu pouco", humor: "Agitado",    fraldas: "Troca normal", observacoes: "Brincou muito no parque", matriculaNr: 102, professorId: 2 },
+        { id: 3,  dataRegistro: getRelativeDate(-1), refeicao: 1, alimentacao: "Comeu bem",       sono: "Não dormiu",   humor: "Calmo",      fraldas: "Troca normal", observacoes: "Concentrado na pintura", matriculaNr: 103, professorId: 3 },
+        { id: 4,  dataRegistro: getRelativeDate(-1), refeicao: 1, alimentacao: "Comeu tudo",      sono: "Dormiu 2h",   humor: "Radiante",   fraldas: "Troca normal", observacoes: "Adora a roda de música", matriculaNr: 104, professorId: 4 },
+        { id: 5,  dataRegistro: getRelativeDate(-1), refeicao: 1, alimentacao: "Lanchou bem",      sono: "Dormiu 1h30", humor: "Feliz",      fraldas: "Troca normal", observacoes: "Interagiu com os colegas", matriculaNr: 105, professorId: 5 },
+        { id: 6,  dataRegistro: getRelativeDate(-1), refeicao: 1, alimentacao: "Comeu tudo",      sono: "Dormiu 1h",   humor: "Preguiçoso", fraldas: "Troca normal", observacoes: "Ficou quietinho hoje", matriculaNr: 106, professorId: 6 },
+        { id: 7,  dataRegistro: getRelativeDate(-1), refeicao: 1, alimentacao: "Recusou a fruta",  sono: "Não dormiu",   humor: "Choroso",    fraldas: "Troca normal", observacoes: "Sentiu falta da mamãe", matriculaNr: 107, professorId: 7 },
+        { id: 8,  dataRegistro: getRelativeDate(-1), refeicao: 1, alimentacao: "Comeu bem",       sono: "Dormiu 1h",   humor: "Feliz",      fraldas: "Troca normal", observacoes: "Muito interessado na história", matriculaNr: 108, professorId: 8 },
+        { id: 9,  dataRegistro: getRelativeDate(-1), refeicao: 1, alimentacao: "Comeu tudo",      sono: "Dormiu 2h",   humor: "Energético", fraldas: "Troca normal", observacoes: "Correu muito no pátio", matriculaNr: 109, professorId: 9 },
+        { id: 10, dataRegistro: getRelativeDate(-1), refeicao: 1, alimentacao: "Comeu bem",       sono: "Dormiu 1h",   humor: "Tranquilo",  fraldas: "Troca normal", observacoes: "Desenhou a família", matriculaNr: 110, professorId: 10 }
     ],
 
     // MatriculaAulasEntity: planejamentoId, matriculaNr, status (0=Presente, 1=Falta)
