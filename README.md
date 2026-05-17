@@ -21,6 +21,14 @@ Este projeto é um sistema de gestão para escolas infantis desenvolvido como pa
 
 ---
 
+## 👥 Integrantes do Grupo
+*   **Bruno Rodrigues da Silva Neves:** Líder do CodeNova. Perfil mediador e articulador. Responsável por alinhar os objetivos estratégicos com a execução e garantir a coesão da equipe.
+*   **Mariana Firmo Partezani:** Designer de Experiência e Interface (UX/UI). Perfil criativo e empático. Responsável pela identidade visual, psicologia das cores e pela facilidade de uso da interface.
+*   **Matheus de Paula Santos:** Desenvolvedor(a) Full-Stack. Perfil técnico e executor. Focado na construção lógica e funcional da plataforma, transformando ideias em código.
+*   **Pedro Henrique Linhares Sobral:** Arquiteto(a) de Dados e Processos. Perfil estrutural e analítico. Cuida da "espinha dorsal" do sistema: como as informações são guardadas e como os fluxos funcionam.
+
+---
+
 ## 🚀 Sobre o Projeto
 O sistema foi projetado para atender três pilares fundamentais de uma instituição de ensino:
 
@@ -62,6 +70,20 @@ O sistema foi projetado para atender três pilares fundamentais de uma institui�
 - **JavaScript (Vanilla):** Lógica de Single Page Application (SPA) para navegação sem recarregamento.
 - **Bootstrap 5:** Framework para componentes visuais elegantes e grids responsivos.
 - **AOS (Animate On Scroll):** Animações suaves para uma apresentação impactante.
+
+---
+
+## 📐 Modelagem do Sistema
+
+### 📊 Diagrama do Banco de Dados
+<p align="center">
+  <img src="./img/diagrama_banco.jpg" alt="Diagrama do Banco de Dados" width="800">
+</p>
+
+### 💻 Diagrama de Classes
+<p align="center">
+  <img src="./img/diagrama_classe.png" alt="Diagrama de Classes" width="800">
+</p>
 
 ---
 
